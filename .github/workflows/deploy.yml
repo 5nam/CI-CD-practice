@@ -29,3 +29,8 @@ jobs:
         run: | # 이 bar 문자를 사용해서 여러 줄의 코드 작성 가능
           echo "Good"
           echo "Morning"
+
+      - name: Github Actions 자체에 저장되어 있는 변수 사용
+        run: |
+          echo $GITHUB_SHA
+          echo $GITHUB_REPOSITORY
