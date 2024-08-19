@@ -32,5 +32,12 @@ jobs:
 
       - name: Github Actions 자체에 저장되어 있는 변수 사용
         run: |
+#          각 커밋은 고유한 값을 가지고 있음. 이 아래 변수는 '지금 해당하는 커밋의 ID 값'을 뜻함
           echo $GITHUB_SHA
+#          아래 변수는 깃허브 리포지토리 이름을 뜻함
           echo $GITHUB_REPOSITORY
+
+      - name: 아무한테 노출이 되면 안되는 값
+        run: |
+          echo ${{ secrets.MY_NAME }}
+          echo ${{ secrets.MY_HOBBY }}
