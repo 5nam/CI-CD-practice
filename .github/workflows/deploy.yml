@@ -22,7 +22,7 @@ jobs:
 
           script: |
             cd ~/CI-CD-practice
-            sudo git pull origin master
+            git pull origin master
             ./gradlew clean build
             sudo fuser -k -n tcp 8080 || true
             nohup java -jar build/libs/*SNAPSHOT.jar > ./output.log 2>&1 &
