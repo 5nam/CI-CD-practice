@@ -16,7 +16,7 @@ jobs:
         uses: appleboy/ssh-action@v1.0.3 # 사용할 라이브러리 명시
 
         env:
-          APPLICATION_PROPERTIES: ${{ APPLICATION_PROPERTIES }}
+          APPLICATION_PROPERTIES: ${{ secrets.APPLICATION_PROPERTIES }}
 
         with:
           host: ${{ secrets.EC2_HOST }}
