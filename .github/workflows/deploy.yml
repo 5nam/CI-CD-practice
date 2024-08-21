@@ -3,13 +3,12 @@ name: CI/CD 배포 자동화 # 워크플로우의 이름을 붙이는 것
 
 on:
   pull_request:
-    branches: [ "main" ]
-  merge_group:
-    types: [checks_requested]
+    types:
+      - closed
 
 jobs:
-
   Deploy:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
