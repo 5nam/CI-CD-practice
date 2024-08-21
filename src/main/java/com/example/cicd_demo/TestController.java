@@ -9,7 +9,7 @@ public class TestController {
 
     @GetMapping("/")
     public ResponseEntity<String> getCicd() {
-        return ResponseEntity.ok("Hello! CI/CD");
+        return ResponseEntity.ok("HI! CI/CD");
     }
 
 }

@@ -3,13 +3,12 @@ name: CI/CD 배포 자동화 # 워크플로우의 이름을 붙이는 것
 
 on:
   pull_request:
-    branches: [ "main" ]
-  merge_group:
-    types: [checks_requested]
+    types:
+      - closed
 
 jobs:
-
   Deploy:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
@@ -19,11 +18,11 @@ jobs:
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
-          password: ${{ secrets.EC2_PASSWORD }}
+          key: ${{ secrets.EC2_PASSWORD }}
 
           script: |
             cd ~/CI-CD-practice
-            sudo git pull origin main
+            git pull origin master
             ./gradlew clean build
             sudo fuser -k -n tcp 8080 || true
             nohup java -jar build/libs/*SNAPSHOT.jar > ./output.log 2>&1 &
