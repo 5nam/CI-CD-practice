@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class TestController {
 
-    @GetMapping("/cicd")
+    @GetMapping("/")
     public ResponseEntity<String> getCicd() {
-        return ResponseEntity.ok("Hello!");
+        return ResponseEntity.ok("Hello! CI/CD");
     }
 
 }
