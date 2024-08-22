@@ -22,7 +22,9 @@ jobs:
           java-version: 17
 
       - name: application.properties 생성
-        run: echo ${{ secrets.APPLICATION_PROPERTIES }} > src/main/resources/application.properties
+        env:
+          APPLICATION_PROPERTIES: ${{ secrets.APPLICATION_PROPERTIES }}
+        run: echo "$APPLICATION_PROPERTIES" > src/main/resources/application.properties
 
       - name: 빌드 및 테스트
         run: ./gradlew clean build
