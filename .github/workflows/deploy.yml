@@ -12,23 +12,46 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Build
-        uses: appleboy/ssh-action@v1.0.3 # 사용할 라이브러리 명시
+      - name: 리포지토리 파일 불러오기
+        uses: actions/checkout@v4
 
-        env:
-          APPLICATION_PROPERTIES: ${{ secrets.APPLICATION_PROPERTIES }}
+      - name: 빌드, 테스트를 위한 java17 설치
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: application.properties 생성
+        run: echo ${{ secrets.APPLICATION_PROPERTIES }} > src/main/resources/application.properties
+
+      - name: 빌드 및 테스트
+        run: ./gradlew clean build
+
+      - name: 빌드된 파일 이름 변경
+        run: mv ./build/libs/*SNAPSHOT.jar ./project.jar
+
+      - name: SCP 로 EC2 에 파일 전송
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_PASSWORD }}
+          source: ./project.jar
+          target: ~/CI-CD-practice/tobe
+
+      - name: 서버 배포
+        uses: appleboy/ssh-action@v1.0.3 # 사용할 라이브러리 명시
 
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_PASSWORD }}
-          envs: APPLICATION_PROPERTIES
 
           script: |
-            cd ~/CI-CD-practice
-            rm -rf src/main/resources/application.properties
-            git pull origin master
-            echo "$APPLICATION_PROPERTIES" > src/main/resources/application.properties
-            ./gradlew clean build
+            rm -rf ~/CI-CD-practice/current
+            mkdir ~/CI-CD-practice/current
+            mv ~/CI-CD-practice/tobe/project.jar ~/CI-CD-practice/current/project.jar
+            cd ~/CI-CD-practice/current
             sudo fuser -k -n tcp 8080 || true
-            nohup java -jar build/libs/*SNAPSHOT.jar > ./output.log 2>&1 &
+            nohup java -jar project.jar > ./output.log 2>&1 &
+            rm -rf ~/CI-CD-practice/tobe
