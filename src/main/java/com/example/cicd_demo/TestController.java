@@ -9,7 +9,7 @@ public class TestController {
 
     @GetMapping("/")
     public ResponseEntity<String> getCicd() {
-        return ResponseEntity.ok("PERSONAL PROJECT TEST CI/CD");
+        return ResponseEntity.ok("TEAM PROJECT TEST CI/CD");
     }
 
 }
