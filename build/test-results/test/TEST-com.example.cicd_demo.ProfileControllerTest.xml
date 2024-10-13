@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.cicd_demo.ProfileControllerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-10-13T11:09:19" hostname="onam-uiui-MacBookAir.local" time="0.392">
+  <properties/>
+  <testcase name="profile은_인증없이_호출된다()" classname="com.example.cicd_demo.ProfileControllerTest" time="0.392"/>
+  <system-out><![CDATA[20:09:19.336 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.cicd_demo.ProfileControllerTest]: ProfileControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+20:09:19.369 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.cicd_demo.CicdDemoApplication for test class com.example.cicd_demo.ProfileControllerTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.2)
+
+2024-10-13T20:09:19.483+09:00  INFO 88782 --- [    Test worker] c.e.cicd_demo.ProfileControllerTest      : Starting ProfileControllerTest using Java 17.0.12 with PID 88782 (started by onam-ui in /Users/onam-ui/Desktop/Project/CI-CD-practice)
+2024-10-13T20:09:19.483+09:00  INFO 88782 --- [    Test worker] c.e.cicd_demo.ProfileControllerTest      : No active profile set, falling back to 1 default profile: "default"
+2024-10-13T20:09:19.749+09:00  INFO 88782 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 0 (http)
+2024-10-13T20:09:19.754+09:00  INFO 88782 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-10-13T20:09:19.754+09:00  INFO 88782 --- [    Test worker] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-10-13T20:09:19.775+09:00  INFO 88782 --- [    Test worker] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-10-13T20:09:19.775+09:00  INFO 88782 --- [    Test worker] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 286 ms
+2024-10-13T20:09:19.878+09:00  INFO 88782 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 59347 (http) with context path '/'
+2024-10-13T20:09:19.882+09:00  INFO 88782 --- [    Test worker] c.e.cicd_demo.ProfileControllerTest      : Started ProfileControllerTest in 0.474 seconds (process running for 0.811)
+2024-10-13T20:09:20.244+09:00  INFO 88782 --- [o-auto-1-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-10-13T20:09:20.244+09:00  INFO 88782 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-10-13T20:09:20.245+09:00  INFO 88782 --- [o-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
