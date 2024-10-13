@@ -29,12 +29,12 @@ jobs:
       - name: application.properties, application.properties, application.properties 생성
         env:
           APPLICATION_PROPERTIES: ${{ secrets.APPLICATION_PROPERTIES }}
-          APPLICATION_REAL1_PROPERTIES: ${{ secrets.APPLICATION_REAL1_PROPERTIES }}
-          APPLICATION_REAL2_PROPERTIES: ${{ secrets.APPLICATION_REAL2_PROPERTIES }}
+#          APPLICATION_REAL1_PROPERTIES: ${{ secrets.APPLICATION_REAL1_PROPERTIES }}
+#          APPLICATION_REAL2_PROPERTIES: ${{ secrets.APPLICATION_REAL2_PROPERTIES }}
         run:
           echo "$APPLICATION_PROPERTIES" > src/main/resources/application.properties
-          echo "$APPLICATION_PROPERTIES" > src/main/resources/application-real1.properties
-          echo "$APPLICATION_PROPERTIES" > src/main/resources/application-real2.properties
+#          echo "$APPLICATION_PROPERTIES" > src/main/resources/application-real1.properties
+#          echo "$APPLICATION_PROPERTIES" > src/main/resources/application-real2.properties
 
       - name: 빌드 및 테스트
         run: ./gradlew clean build
