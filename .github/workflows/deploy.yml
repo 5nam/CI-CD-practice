@@ -26,16 +26,21 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - name: application.properties 생성
+      - name: application.properties, application.properties, application.properties 생성
         env:
           APPLICATION_PROPERTIES: ${{ secrets.APPLICATION_PROPERTIES }}
-        run: echo "$APPLICATION_PROPERTIES" > src/main/resources/application.properties
+          APPLICATION_REAL1_PROPERTIES: ${{ secrets.APPLICATION_REAL1_PROPERTIES }}
+          APPLICATION_REAL2_PROPERTIES: ${{ secrets.APPLICATION_REAL2_PROPERTIES }}
+        run:
+          echo "$APPLICATION_PROPERTIES" > src/main/resources/application.properties
+          echo "$APPLICATION_PROPERTIES" > src/main/resources/application-real1.properties
+          echo "$APPLICATION_PROPERTIES" > src/main/resources/application-real2.properties
 
       - name: 빌드 및 테스트
         run: ./gradlew clean build
 
-      - name: 빌드된 파일 이름 변경
-        run: mv ./build/libs/*SNAPSHOT.jar ./project.jar
+#      - name: 빌드된 파일 이름 변경
+#        run: mv ./build/libs/*SNAPSHOT.jar ./project.jar
 
       - name: SCP 로 EC2 에 파일 전송
         uses: appleboy/scp-action@v0.1.7
@@ -43,7 +48,8 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_PASSWORD }}
-          source: ./project.jar
+#          source: ./project.jar
+          source: ./build/libs/*SNAPSHOT.jar
           target: ~/CI-CD-practice/tobe
 
       - name: 서버 배포
@@ -55,10 +61,10 @@ jobs:
           key: ${{ secrets.EC2_PASSWORD }}
 
           script: |
-            rm -rf ~/CI-CD-practice/current
-            mkdir ~/CI-CD-practice/current
-            mv ~/CI-CD-practice/tobe/project.jar ~/CI-CD-practice/current/project.jar
-            cd ~/CI-CD-practice/current
-            sudo fuser -k -n tcp 8080 || true
-            nohup java -jar project.jar > ./output.log 2>&1 &
-            rm -rf ~/CI-CD-practice/tobe
+            cd ~/CI-CD-practice
+            chmod +x stop.sh
+            chmod +x start.sh
+            chmod +x health.sh
+            ./stop.sh
+            ./start.sh
+            ./health.sh
