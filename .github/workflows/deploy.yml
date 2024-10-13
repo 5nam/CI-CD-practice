@@ -62,6 +62,6 @@ jobs:
 
           script: |
             cd ~/CI-CD-practice
-            sh stop.sh
-            sh start.sh
-            sh health.sh
+            bash stop.sh
+            bash start.sh
+            bash health.sh
