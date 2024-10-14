@@ -61,7 +61,7 @@ jobs:
           key: ${{ secrets.EC2_PASSWORD }}
 
           script: |
-            cd ~/CI-CD-practice
+            cd ~/CI-CD-practice/scripts
             bash stop.sh
             bash start.sh
             bash health.sh
